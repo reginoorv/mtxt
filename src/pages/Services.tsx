@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -57,7 +56,7 @@ const Services = () => {
       detailedDescription: "Our retirement planning services help you prepare for a financially secure future. We assess your current situation, define your retirement goals, and create strategies to help you achieve the retirement lifestyle you desire.",
       icon: (
         <svg className="h-12 w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
       ),
     },
@@ -98,8 +97,8 @@ const Services = () => {
       <Navbar />
       
       {/* Header */}
-      <section className="hero-gradient pt-32 pb-20">
-        <div className="container mx-auto px-4 md:px-6 lg:px-8 text-center">
+      <section className="relative bg-gradient-to-br from-blue-50 via-blue-100/80 to-blue-200/60 pt-32 pb-20 backdrop-blur-lg before:absolute before:inset-0 before:bg-white/40 before:backdrop-blur-xl before:z-0">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 text-center relative z-10">
           <ScrollAnimationWrapper>
             <h1 className="text-4xl md:text-5xl font-bold text-taxmagnet-darkblue mb-6">Our Services</h1>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
