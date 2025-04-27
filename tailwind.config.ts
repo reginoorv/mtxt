@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -57,11 +56,11 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         taxmagnet: {
-          blue: "#1E90FF",
-          lightblue: "#87CEFA",
-          darkblue: "#0066CC",
-          gray: "#F5F5F5",
-          darkgray: "#333333",
+          blue: "#0EA5E9",
+          lightblue: "#38BDF8",
+          darkblue: "#0369A1",
+          gray: "#F8FAFC",
+          darkgray: "#1E293B",
         },
       },
       borderRadius: {
@@ -86,15 +85,21 @@ export default {
           "0%": { opacity: "0", transform: "scale(0.95)" },
           "100%": { opacity: "1", transform: "scale(1)" },
         },
+        "slide-in": {
+          "0%": { transform: "translateY(20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 0.5s ease-out",
-        "scale-in": "scale-in 0.5s ease-out",
+        "fade-in": "fade-in 0.6s ease-out",
+        "scale-in": "scale-in 0.4s ease-out",
+        "slide-in": "slide-in 0.5s ease-out",
       },
       backgroundImage: {
-        'blue-gradient': 'linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%)',
+        'hero-gradient': 'linear-gradient(90deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%)',
+        'service-gradient': 'linear-gradient(90deg, hsla(46, 73%, 75%, 1) 0%, hsla(176, 73%, 88%, 1) 100%)',
       },
     },
   },

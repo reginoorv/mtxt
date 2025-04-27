@@ -19,7 +19,7 @@ const ScrollAnimationWrapper = ({ children, className = '' }: ScrollAnimationWra
       {
         root: null,
         rootMargin: '0px',
-        threshold: 0.1,
+        threshold: 0.2,
       }
     );
     

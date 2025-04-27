@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
 
 interface ServiceCardProps {
   title: string;
@@ -13,33 +14,29 @@ const ServiceCard = ({ title, description, detailedDescription, icon }: ServiceC
   const [isHovered, setIsHovered] = useState(false);
   
   return (
-    <div 
-      className={cn(
-        "bg-white rounded-lg p-6 shadow-md h-full transition-all duration-300",
-        isHovered ? "transform scale-105 shadow-lg bg-blue-50" : ""
-      )}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="flex flex-col h-full">
-        <div className="text-taxmagnet-blue mb-4 flex justify-center">
-          {icon}
-        </div>
-        <h3 className="text-xl font-bold mb-2 text-center text-taxmagnet-darkblue">{title}</h3>
-        
-        <div className="mt-2 flex-grow">
-          {!isHovered && (
-            <p className="text-gray-600 text-center animate-fade-in">{description}</p>
+    <HoverCard>
+      <HoverCardTrigger asChild>
+        <div 
+          className={cn(
+            "service-card p-6 rounded-xl h-full",
+            "border border-gray-200/50",
+            "flex flex-col items-center",
+            isHovered ? "bg-blue-50/50" : ""
           )}
-          
-          {isHovered && (
-            <div className="animate-fade-in">
-              <p className="text-gray-700">{detailedDescription}</p>
-            </div>
-          )}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div className="text-taxmagnet-blue mb-4 transform transition-transform duration-300 hover:scale-110">
+            {icon}
+          </div>
+          <h3 className="text-xl font-bold mb-2 text-center text-taxmagnet-darkblue">{title}</h3>
+          <p className="text-gray-600 text-center animate-fade-in">{description}</p>
         </div>
-      </div>
-    </div>
+      </HoverCardTrigger>
+      <HoverCardContent className="w-80 bg-white/90 backdrop-blur-sm p-4">
+        <p className="text-sm text-gray-700">{detailedDescription}</p>
+      </HoverCardContent>
+    </HoverCard>
   );
 };
 
