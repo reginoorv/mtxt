@@ -1,11 +1,13 @@
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { Menu } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -13,10 +15,15 @@ const Navbar = () => {
     };
     
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    // Scroll to top when route changes
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Close mobile menu when route changes
+    setIsMenuOpen(false);
+  }, [location.pathname]);
   
   return (
     <nav 
@@ -25,79 +32,78 @@ const Navbar = () => {
         isScrolled ? "glass-nav" : "bg-transparent"
       )}
     >
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 flex justify-between items-center">
-        {/* Logo */}
-        <Link 
-          to="/" 
-          className="text-2xl font-bold text-taxmagnet-darkblue flex items-center"
-        >
-          <span className="mr-2">TM</span> 
-          <span className="hidden md:inline">TaxMagnet</span>
-        </Link>
-        
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-8">
-          <Link to="/" className="text-taxmagnet-darkblue hover:text-taxmagnet-blue transition-colors">
-            Home
-          </Link>
-          <Link to="/services" className="text-taxmagnet-darkblue hover:text-taxmagnet-blue transition-colors">
-            Services
-          </Link>
-          <Link to="/about" className="text-taxmagnet-darkblue hover:text-taxmagnet-blue transition-colors">
-            About
-          </Link>
-        </div>
-        
-        {/* Mobile Menu Button */}
-        <button 
-          onClick={() => setIsMenuOpen(!isMenuOpen)} 
-          className="md:hidden text-taxmagnet-darkblue focus:outline-none"
-        >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor" 
-            className="w-6 h-6"
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <Link 
+            to="/" 
+            className="text-2xl font-bold text-taxmagnet-darkblue font-display flex items-center"
           >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} 
-            />
-          </svg>
-        </button>
-      </div>
-      
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg absolute top-full left-0 right-0 animate-fade-in">
-          <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+            <span className="mr-2">TM</span> 
+            <span className="hidden md:inline">TaxMagnet</span>
+          </Link>
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex space-x-8">
             <Link 
               to="/" 
-              className="text-taxmagnet-darkblue hover:text-taxmagnet-blue transition-colors py-2 px-4"
-              onClick={() => setIsMenuOpen(false)}
+              className="text-taxmagnet-darkblue hover:text-taxmagnet-blue transition-colors font-medium"
             >
               Home
             </Link>
             <Link 
               to="/services" 
-              className="text-taxmagnet-darkblue hover:text-taxmagnet-blue transition-colors py-2 px-4"
-              onClick={() => setIsMenuOpen(false)}
+              className="text-taxmagnet-darkblue hover:text-taxmagnet-blue transition-colors font-medium"
             >
               Services
             </Link>
             <Link 
               to="/about" 
-              className="text-taxmagnet-darkblue hover:text-taxmagnet-blue transition-colors py-2 px-4"
-              onClick={() => setIsMenuOpen(false)}
+              className="text-taxmagnet-darkblue hover:text-taxmagnet-blue transition-colors font-medium"
             >
               About
             </Link>
           </div>
+          
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)} 
+            className="md:hidden text-taxmagnet-darkblue focus:outline-none"
+            aria-label="Toggle menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
         </div>
-      )}
+        
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg animate-fade-in border-t border-gray-100">
+            <div className="container mx-auto py-4 flex flex-col space-y-4">
+              <Link 
+                to="/" 
+                className="text-taxmagnet-darkblue hover:text-taxmagnet-blue transition-colors py-2 px-4 text-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link 
+                to="/services" 
+                className="text-taxmagnet-darkblue hover:text-taxmagnet-blue transition-colors py-2 px-4 text-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Services
+              </Link>
+              <Link 
+                to="/about" 
+                className="text-taxmagnet-darkblue hover:text-taxmagnet-blue transition-colors py-2 px-4 text-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
     </nav>
   );
 };
